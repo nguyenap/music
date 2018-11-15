@@ -51,16 +51,16 @@ export default class Drawer extends React.Component {
           <ButtonCircle
             title="sign up"
             classNameContainer="button"
-            classNameTitle="tile"
+            onClick={()=>console.log('sign up')}
           />
           <ButtonCircle
             title="log in"
             classNameContainer="button"
-            classNameTitle="tile"
+            onClick={()=>console.log('login')}
           />
           <div className="cookies-privacy">
             <span>Cookies</span>
-
+            <span>&#448;</span>
             <span>Privacy</span>
           </div>
         </div>

@@ -1,0 +1,35 @@
+.home {
+  height: 100%;
+  padding: 0 32px;
+  .header {
+    display: flex;
+    justify-content: center;
+    padding:20px 0 12px;
+    .header-text {
+      text-transform: uppercase;
+      font-size: 15px;
+      height: 30px;
+      width: 130px;
+      text-align: center;
+      color: #aeaeae;
+      &:hover {
+        color: #fff;
+      }
+      &:active {
+        text-decoration-line: underline;
+        text-decoration-color: cadetblue;
+      }
+      &:before {
+        content: "";
+        height: 2px;
+        background-color: #1db954;
+        width: 30px;
+        position: absolute;
+        display: block;
+        left: 50%;
+        bottom: 0;
+        margin-left: -15px;
+      }
+    }
+  }
+}

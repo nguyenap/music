@@ -38,6 +38,19 @@
   .login {
     bottom: 0;
     .button {
+      &:hover{
+        transform: scale(1.06);
+      }
+    }
+  
+    .cookies-privacy {
+      display: flex;
+      justify-content: space-around;
+      padding: 0 10px;
+      
+      span {
+        color: #fff;
+      }
     }
   }
 }
