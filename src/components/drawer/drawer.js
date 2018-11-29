@@ -10,10 +10,21 @@ import ButtonIcon from '../button/button-icon'
 
 import './drawer.scss'
 import ButtonCircle from '../button/button-circle';
+import { apiAuth } from '../../api/auth';
+import { api } from '../../api/api';
 
 export default class Drawer extends React.Component {
-  contructor() {
-
+  constructor(props) {
+    super(props)
+  }
+  login(){
+    console.log('login');
+    // api.getAccess();
+    window.location.href="http://localhost:8888"
+    // apiAuth.getAccessToken()
+    //   .then(res=>
+    //     console.log(res))
+    //   .catch(e => console.log('e',e))
   }
 
   render() {
@@ -56,7 +67,7 @@ export default class Drawer extends React.Component {
           <ButtonCircle
             title="log in"
             classNameContainer="button"
-            onClick={()=>console.log('login')}
+            onClick={()=>this.login()}
           />
           <div className="cookies-privacy">
             <span>Cookies</span>

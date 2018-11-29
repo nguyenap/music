@@ -1,0 +1,47 @@
+.track-container{
+  display: flex;
+  padding: 10px 0;
+  margin: 5px 0;
+
+  .icon-play{
+    height: 30px;
+    width: 30px;
+    .music-note{
+
+    }
+    .play{
+      display: none;
+    }
+    .pause{
+      display: none;
+    }
+    .symboy {
+      color: #a9aeac;
+      font-size: 20px;
+      margin-right: 15px;
+    }
+  }
+  
+  .song-name{
+
+  }
+  .artist {
+
+  }
+
+  &:hover{
+    background-color: #172028;
+    .icon-play{
+      .music-note{
+        display: none;
+      }
+      .play{
+        display: unset;
+        color: #fff;
+      }
+      .pause{
+        display: none;
+      }
+    }
+  }
+}

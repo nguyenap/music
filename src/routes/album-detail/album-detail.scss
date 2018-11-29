@@ -1,0 +1,40 @@
+.container-album {
+  height: 100%;
+  color: #fff;
+  .album-detail{
+    display: grid;
+    height: 100%;
+    grid-template-columns: auto auto;
+    border-top: 1px solid #fff;
+    .album-description {
+      margin-left: auto;
+      margin-right: auto;
+      padding: 10px 15px;
+      max-width: 350px; 
+      grid-column: 1;
+
+      .album-title {
+        font-size: 30px;
+        font-weight: 600
+        
+      }
+      .album-image {
+        width: 200px;
+        height: 200px;
+        border-radius: 100px;
+        margin-bottom: 20px;
+      }
+      .text {
+        padding: 20px 0
+      }
+    }
+    .song-list {
+      padding: 10px 15px;
+      height: 100%;
+      overflow-y: scroll;
+      grid-column: 2;
+      .tracks-container {
+      }
+    }
+  }
+}
