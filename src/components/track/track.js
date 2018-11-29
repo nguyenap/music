@@ -16,11 +16,12 @@ export default class Track extends React.Component {
 
   chooseSong(){
     let {song, onClick}=  this.props;
-    localData.setCurrentSong(song);
+    localData.setCurrentSong(JSON.stringify(song));
     onClick();
   }
   render() {
-    const { name, artists, duration_ms, onClick } = this.props;
+    const { song} = this.props;
+    let {name, artists, duration_ms } = song?song:null;
     let duration = this.passMsToMin(duration_ms)
     return (
       <div className="track-container" onClick={()=>this.chooseSong()}>

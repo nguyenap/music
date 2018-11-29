@@ -57,7 +57,7 @@ export default class Home extends React.Component {
       <div className="home">
         <div className="header">
           {header.map((item) =>
-            <a className="header-text" href="http://localhost:8888">
+            <a className="header-text" >
               {item}
             </a>
           )}
@@ -74,8 +74,7 @@ export default class Home extends React.Component {
                   data={album}
                   onClick={() => this.getDetailAlbum(album)}
                 />
-              )
-              }
+              )}
               </div>
             </>
             : <div> no content, please login again</div>}

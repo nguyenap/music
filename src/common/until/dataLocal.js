@@ -1,7 +1,7 @@
 const localData={
   setCurrentSong:song => localStorage.setItem("current-song", song),
 
-  getCurrentSong: new Promise (() => localStorage.getItem("current-song")),
+  getCurrentSong: () => localStorage.getItem("current-song"),
 
   setAccessToken: (token) => localStorage.setItem("access_token", token),
 

@@ -4,6 +4,7 @@ import './album-detail.scss'
 import Track from '../../components/track/track';
 import { apiTrack } from '../../api/tracks-api';
 import { localData } from '../../common/until/dataLocal';
+import { emitter, EventTypes } from '../../common/until/EventEmitter';
 
 export default class AlbumDetail extends React.Component {
   constructor(props) {
@@ -13,12 +14,8 @@ export default class AlbumDetail extends React.Component {
       currentStracksId: ""
     }
   }
-  setCurrentSong(song){
-    // apiTrack.getATracks(id)
-    // .then(resp => {
-    //   console.log('resp', resp)
-    // })
-    localData.setCurrentSong(song);
+  play() {
+    emitter.emit(EventTypes.PLAY_MUSIC)
   }
 
   render() {
@@ -49,10 +46,8 @@ export default class AlbumDetail extends React.Component {
             <div className="tracks-container">
               {tracks.items.length > 0 && tracks.items.map(track => (
                 <Track
-                  name={track.name}
-                  artists={track.artists}
-                  duration_ms={track.duration_ms}
-                  onClick={() => this.setCurrentSong(track)}
+                  song = {track}
+                  onClick={() => this.play()}
                 />
               ))}
             </div>

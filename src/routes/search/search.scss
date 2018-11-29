@@ -26,6 +26,7 @@
     .tab{
       color: #a3aaa8;
       padding:10px 15px;
+      font-size: 15px;
       &.active{
         color: #fff
       }
@@ -38,6 +39,13 @@
     width: 100%;
     padding: 0 35px;
     overflow: hidden scroll;
+    &.albums {
+      display: grid;
+      grid-template-columns: auto auto auto auto;
+    }
+    .item-album{
+      margin: 15px
+    }
   }
 }
 .search-input-container{
