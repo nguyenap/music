@@ -4,7 +4,7 @@ import {
   Switch 
 } from 'react-router-dom'
 import Home from './routes/home/home';
-import Search from './routes/search';
+import Search from './routes/search/search';
 import Library from './routes/library';
 import Login from './routes/login'
 import { _token } from './api/api';

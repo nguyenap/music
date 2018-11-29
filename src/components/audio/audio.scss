@@ -1,0 +1,16 @@
+.audio-container {
+  position:fixed;
+  height: 90px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  background-color: #282828;
+  z-index: 9;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 25px;
+  .song-name {
+    font-size: 20px;
+    color: #fff
+  }
+}

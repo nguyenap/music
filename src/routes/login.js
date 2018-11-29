@@ -1,5 +1,6 @@
 import React from 'react';
 import { _token, setToken } from '../api/api';
+import { localData } from '../common/until/dataLocal';
 
 
 export default class Login extends React.Component {
@@ -9,7 +10,7 @@ export default class Login extends React.Component {
     console.log('access-token', token.access_token)
     token ?
       (setToken(token.access_token),
-        localStorage.setItem("access_token", token.access_token)
+        localData.setAccessToken(token.access_token)
       ): null;
   }
 

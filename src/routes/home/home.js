@@ -18,11 +18,11 @@ export default class Home extends React.Component {
     apiAlbum.getSeveralAlbums()
       .then(resp => {
         console.log('resp', resp)
-        resp.albums && resp.albums.length >0 ?
-        this.setState({
-          albums: resp.albums
-        })
-        :null
+        resp.albums && resp.albums.length > 0 ?
+          this.setState({
+            albums: resp.albums
+          })
+          : null
       })
   }
 
@@ -37,14 +37,14 @@ export default class Home extends React.Component {
         });
       })
   }
-  getDetailAlbum(album){
-    const {history}= this.props;
-    const {id, href} = album;
+  getDetailAlbum(album) {
+    const { history } = this.props;
+    const { id, href } = album;
     history.push({
-      pathname:"/album",
-      search:id,
-      state:{
-        album:album
+      pathname: "/album",
+      search: id,
+      state: {
+        album: album
       }
     })
   }
@@ -65,17 +65,20 @@ export default class Home extends React.Component {
         <div className="home-content">
 
           {albums.length > 0 ?
-            (
-              albums.map(album =>
+            <>
+              <div className="title-content">Albums</div>
+              <div className="home-content-items">
+              {albums.map(album =>
                 <ListType
                   className="item-album"
                   data={album}
-                  onClick={()=>this.getDetailAlbum(album)}
+                  onClick={() => this.getDetailAlbum(album)}
                 />
               )
-
-            ) 
-          : <div> no content, please login again</div>}
+              }
+              </div>
+            </>
+            : <div> no content, please login again</div>}
         </div>
 
       </div>

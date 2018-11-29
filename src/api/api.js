@@ -66,7 +66,7 @@ const api = {
     }
     return fetch(baseUrl + endpoint, options).then(result => result.json())
   },
-  get: (endpoint: string): Promise => {
+  get: (endpoint: string, params: Object): Promise => {
     const options = {
       method: 'GET',
       headers: {
@@ -76,7 +76,7 @@ const api = {
         Authorization: 'Bearer '+ _token,
       }
     }
-    return fetch(baseUrl + endpoint, options).then(result => result.json()).catch(e=> console.log('e',e))
+    return fetch(baseUrl + endpoint +`?${querystring.stringify(params)}`, options).then(result => result.json()).catch(e=> console.log('e',e))
   },
   put: (endpoint: string, params: Object): Promise => {
     const options = {

@@ -3,6 +3,7 @@ import React from 'react'
 import './album-detail.scss'
 import Track from '../../components/track/track';
 import { apiTrack } from '../../api/tracks-api';
+import { localData } from '../../common/until/dataLocal';
 
 export default class AlbumDetail extends React.Component {
   constructor(props) {
@@ -12,11 +13,12 @@ export default class AlbumDetail extends React.Component {
       currentStracksId: ""
     }
   }
-  getATrack(id){
-    apiTrack.getATracks(id)
-    .then(resp => {
-      console.log('resp', resp)
-    })
+  setCurrentSong(song){
+    // apiTrack.getATracks(id)
+    // .then(resp => {
+    //   console.log('resp', resp)
+    // })
+    localData.setCurrentSong(song);
   }
 
   render() {
@@ -50,7 +52,7 @@ export default class AlbumDetail extends React.Component {
                   name={track.name}
                   artists={track.artists}
                   duration_ms={track.duration_ms}
-                  onClick={() => this.getATrack(track.id)}
+                  onClick={() => this.setCurrentSong(track)}
                 />
               ))}
             </div>

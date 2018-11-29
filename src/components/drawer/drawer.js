@@ -49,12 +49,12 @@ export default class Drawer extends React.Component {
               className="icon"
               path='/home'
             />
-            <ButtonIcon
+            {/* <ButtonIcon
               icon={<IconLibrary className="icon" />}
               title="Library"
               className="icon"
               path='/library'
-            />
+            /> */}
           </div>
 
         </div>

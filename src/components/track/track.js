@@ -1,17 +1,29 @@
 import React from 'react'
 
 import './track.scss'
+import { localData } from '../../common/until/dataLocal';
 
 export default class Track extends React.Component {
   constructor(props) {
     super(props);
   }
 
+  passMsToMin(times){
+    let minutes = Math.floor(times/60000)
+    let seconds = ((times%60000)/1000).toFixed(0);
+    return minutes+":"+(seconds<10?"0":"")+seconds;
+  }
+
+  chooseSong(){
+    let {song, onClick}=  this.props;
+    localData.setCurrentSong(song);
+    onClick();
+  }
   render() {
     const { name, artists, duration_ms, onClick } = this.props;
-    console.log('lenth', artists)
+    let duration = this.passMsToMin(duration_ms)
     return (
-      <div className="track-container" onClick={onClick}>
+      <div className="track-container" onClick={()=>this.chooseSong()}>
         <div className="icon-play">
           <span className="music-note symboy">♪</span>
           <span className="play isPlaying symboy">&#9654;</span>
@@ -33,9 +45,9 @@ export default class Track extends React.Component {
             }
           </div>
         </div>
-        <span className="duration">
-
-        </span>
+        <div className="duration">
+            {duration}
+        </div>
       </div>
     );
   };

@@ -6,6 +6,8 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import './App.css'
 import { setToken } from './api/api';
 import history from './common/history'
+import { localData } from './common/until/dataLocal';
+import Audio from './components/audio/audio';
 class App extends Component {
 
   constructor(){
@@ -14,7 +16,7 @@ class App extends Component {
   }
 
   getTokenFromLocal(){
-    let token = localStorage.getItem('access_token');
+    let token = localData.getAccessToken();
     console.log('access-token', token)
     token && setToken(token);
   }
@@ -26,6 +28,7 @@ class App extends Component {
           <div className="content">
              <Root />
           </div>
+          <Audio/>
         </div>
       </Router>
     );

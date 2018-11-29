@@ -1,11 +1,13 @@
 .track-container{
   display: flex;
-  padding: 10px 0;
+  align-items: center;
+  padding: 5px 10px;
   margin: 5px 0;
-
+  color: #fff;
+  align-items: baseline;
   .icon-play{
-    height: 30px;
-    width: 30px;
+    height: 27px;
+    width: 27px;
     .music-note{
 
     }
@@ -23,10 +25,11 @@
   }
   
   .song-name{
-
+    font-size: 20px;
   }
   .artist {
-
+    font-size: 16px;
+    color: #a9aeac
   }
 
   &:hover{
@@ -43,5 +46,9 @@
         display: none;
       }
     }
+  }
+  .duration{
+    margin-left: auto;
+    color: #a9aeac
   }
 }
