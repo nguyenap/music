@@ -18,9 +18,11 @@ export default class Drawer extends React.Component {
     super(props)
   }
   login(){
-    console.log('login');
-    // api.getAccess();
-    window.location.href="http://localhost:8888"
+    console.log('login')
+    // window.location = window.location.href.includes('localhost')
+    //   ?"http://localhost:8888/login"
+    //   :"http://localhost:8888/login"
+      window.location = "http://localhost:8888/login"
     // apiAuth.getAccessToken()
     //   .then(res=>
     //     console.log(res))

@@ -406,6 +406,21 @@ module.exports = {
               name: 'static/media/[name].[hash:8].[ext]',
             },
           },
+          {
+            test: /\.(js|jsx)$/,
+            exclude: /node_modules/,
+            use: ['babel-loader']
+          },
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: ['babel-loader', 'eslint-loader']
+          },
+          {
+            test: /\.scss$/,
+            include: paths.appSrc,
+            loaders: ["style", "css", "sass"]
+          }
           // ** STOP ** Are you adding a new loader?
           // Make sure to add the new loader(s) before the "file" loader.
         ],
