@@ -25,10 +25,15 @@ export default class Login extends React.Component {
     return hashParams;
   }
   render() {
+    let {history}= this.props;
     return (
       <div style={{fontSize: 35,height: '100%', color: '#fff'}}>
-      { ` token is : ${_token}`}
+        { _token
+        ? ()=>history.push({pathname: "/home" })
+        : "please, press login again to refesh token"
+        }
       </div>
+
     );
   };
 };
