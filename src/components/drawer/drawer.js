@@ -3,7 +3,9 @@ import {
   IconLogo,
   IconSearch,
   IconHome,
-  IconLibrary
+  IconLibrary,
+  IconSearchGreen,
+  IconHomeGreen
 }
   from '../../common/icons/icons';
 import ButtonIcon from '../button/button-icon'
@@ -15,23 +17,27 @@ import { api } from '../../api/api';
 
 export default class Drawer extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      buttonIsActive: "home"
+    }
   }
-  login(){
-    console.log('location',  window.location)
+  login() {
+    console.log('location', window.location)
     window.location = window.location.href.includes('localhost')
-      ?"http://localhost:8888/login"
-      :"http://spotify-backend-demo.herokuapp.com/login"
-      // window.location = "http://localhost:8888/login"
-    // apiAuth.getAccessToken()
-    //   .then(res=>
-    //     console.log(res))
-    //   .catch(e => console.log('e',e))
+      ? "http://localhost:8888/login"
+      : "http://spotify-backend-demo.herokuapp.com/login"
+  }
+  setActiveButton(name) {
+    this.setState({
+      buttonIsActive: name
+    })
   }
 
   render() {
     const { history } = this.props;
-    console.log('props', this.props)
+    console.log('props', this.props);
+    let { buttonIsActive } = this.state;
     return (
       <div className="container">
         <div className="nav-expand">
@@ -41,15 +47,25 @@ export default class Drawer extends React.Component {
           </div>
           <div>
             <ButtonIcon
-              icon={<IconSearch className="icon" />}
+              icon={
+                buttonIsActive === "search" ?
+                  <IconSearchGreen className="icon" />
+                  : <IconSearch className="icon" />}
               title="Search"
               path='/search'
+              onClick={() => this.setActiveButton("search")}
+              isActived={buttonIsActive === "search"}
             />
             <ButtonIcon
-              icon={<IconHome className="icon" />}
+              icon={
+                buttonIsActive === "home"
+                  ? <IconHomeGreen className="icon" />
+                  : <IconHome className="icon" />}
               title="Home"
               className="icon"
               path='/home'
+              onClick={() => this.setActiveButton("home")}
+              isActived={buttonIsActive === "home"}
             />
             {/* <ButtonIcon
               icon={<IconLibrary className="icon" />}
@@ -64,12 +80,12 @@ export default class Drawer extends React.Component {
           <ButtonCircle
             title="sign up"
             classNameContainer="button"
-            onClick={()=>console.log('sign up')}
+            onClick={() => console.log('sign up')}
           />
           <ButtonCircle
             title="log in"
             classNameContainer="button"
-            onClick={()=>this.login()}
+            onClick={() => this.login()}
           />
           <div className="cookies-privacy">
             <span>Cookies</span>

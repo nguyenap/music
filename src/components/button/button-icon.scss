@@ -2,17 +2,21 @@
   height: 50px;
   width: 100%;
   display: flex;
+  text-decoration: none;
   align-items: center;
-
+  color: #b3b3b3;
+  
+  &.active {
+    color: #1db954 !important
+  }
   .title {
     margin-left: 15px;
     font-size: 16px;
-    color: #b3b3b3;
     font-weight: 500;
     &:hover {
       color: #fff;
     }
-    &:active {
+    &.active {
       color: #1db954;
     }
   }

@@ -14,12 +14,14 @@ export default class ButtonIcon extends React.Component {
       className, 
       titleStyle, 
       path,
-      onClick
+      onClick,
+      isActived
     } = this.props;
+    console.log("isActived", isActived)
     return(
       <Link 
         to={path} 
-        className={classNames('button-container', {className})}
+        className={classNames('button-container', isActived?"active":"not-active")}
         onClick={onClick}
       >
         <div style={{float:iconRight?"right":'left'}}>{icon}</div>

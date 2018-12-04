@@ -11,7 +11,7 @@ export default class ButtonCircle extends React.Component {
     const {title, classNameContainer, classNameTitle, onClick} = this.props;
     return( 
       <a ref="http://localhost:8888">
-      <p className={ classNames('btn-circle-container', classNameContainer)} onClick={onClick}  h>
+      <p className={ classNames('btn-circle-container', classNameContainer)} onClick={onClick} >
         <button className={'btn-circle-text'}>{title}</button>
       </p>
         

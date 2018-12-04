@@ -14,7 +14,12 @@ export default class Login extends React.Component {
       ): null;
   }
 
-
+  componentDidMount(){
+    let {history}= this.props;
+    console.log('did mount', _token)
+    _token?history.push("/home")
+    :null;
+  }
   getHashParams(){
     var hashParams = {};
     var e, r = /([^&;=]+)=?([^&;]*)/g,
@@ -26,10 +31,13 @@ export default class Login extends React.Component {
   }
   render() {
     let {history}= this.props;
+    console.log('token', _token);
+    
+    console.log('props',this.props)
     return (
-      <div style={{fontSize: 35,height: '100%', color: '#fff'}}>
+      <div style={{fontSize: 35,height: '100%', color: '#fff'}} onClick={()=>history.push({pathname: "/home" })}>
         { _token
-        ? ()=>history.push({pathname: "/home" })
+        ? `token: ${_token}`
         : "please, press login again to refesh token"
         }
       </div>

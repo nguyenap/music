@@ -77,7 +77,7 @@ export default class Home extends React.Component {
               )}
               </div>
             </>
-            : <div> no content, please login again</div>}
+            : <div style={{color:"#fff", fontSize: 30}}> no content, please login again</div>}
         </div>
 
       </div>

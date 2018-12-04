@@ -6,6 +6,8 @@ import Home from '../../asset/icons/home.png';
 import Library from '../../asset/icons/library.jpg';
 import HomeWhite from '../../asset/icons/home-white.png';
 import SearchWhite from '../../asset/icons/search-white.png';
+import HomeGreen from '../../asset/icons/home-green.png';
+import SearchGreen from '../../asset/icons/search-green.png'
 
 export const IconLogo =({className})=>(
   <img src={Logo} className={className}/>
@@ -24,4 +26,12 @@ export const IconHomeWhite = ({className}) => (
 )
 export const IconLibrary = ({className}) => (
   <img src={Library} className={className} />
+)
+
+export const IconSearchGreen = ({className}) => (
+  <img src={SearchGreen} className={className} />
+)
+
+export const IconHomeGreen = ({className}) => (
+  <img src={HomeGreen} className={className} />
 )
