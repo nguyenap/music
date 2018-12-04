@@ -1,15 +1,20 @@
 .container-list{
   width: 250px;
-  .title-container {
+  .list{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-column-gap: 20px;
+    grid-row-gap: 40px;
+  .item-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     color: #fff;
 
-    .image-album {
+    .image {
       height: 200px;
       width: 200px;
-      border-radius: 150px;
+      // border-radius: 150px;
       &:hover {
         -webkit-animation-name: spin;
         -webkit-animation-duration: 4000ms;
@@ -30,14 +35,15 @@
         animation-timing-function: linear;
       }
     }
-    .title {
+    .name {
       margin-top: 10px;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 400;
       max-width: 200px;
       word-wrap: break-word;
       text-align: center;
     }
+  }
   }
 }
 

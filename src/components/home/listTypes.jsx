@@ -5,42 +5,38 @@ import './listTypes.scss'
 
 export default class ListType extends React.Component {
   contructor() {
-    
+
   }
 
   render() {
     console.log('props', this.props)
-    const {className, onClick} = this.props;
-    const {images, name} = this.props.data;
+    const { className, onClick, title, listData } = this.props;
 
-    return(
-      <div className={classNames("container-list", className)} onClick={onClick}>
-        <div className="title-container">
-          <img src={images[1].url} className="image-album"/>
-          <div className="title">
-            {name}
-          </div>
+    return (
+      <div className={classNames("container-list", className)} >
+        <div className="title">{title}</div>
+        <div className="list">
           {/* <div>View more</div> */}
+          {listData.map(item =>
+            <Type
+              src={item.icons[0].url}
+              name={item.name}
+            />)}
         </div>
-        {/* {example.map(item => 
-          <Type
-            src={item.src}
-            depcription ={item.description}
-          />)} */}
       </div>
     );
   };
 };
 
 class Type extends React.Component {
-  
-  render () {
-    const {src, description} = this.props;
+
+  render() {
+    const { src, name } = this.props;
     return (
-      <div>
-        <img src={src} className="image" alt="image"/>
-        <div className="description">
-          {description}
+      <div className="item-container">
+        <img src={src} className="image" alt="image" />
+        <div className="name">
+          {name}
         </div>
       </div>
     )

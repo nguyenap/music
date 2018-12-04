@@ -39,6 +39,7 @@
     width: 100%;
     padding: 0 35px;
     overflow: hidden scroll;
+    justify-content: space-around;
     &.albums {
       display: grid;
       grid-template-columns: auto auto auto auto;

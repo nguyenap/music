@@ -14,9 +14,11 @@
       &:hover {
         color: #fff;
       }
-      &:active {
+      &.active {
+        color: #fff;
         text-decoration-line: underline;
         text-decoration-color: cadetblue;
+        
       }
       &:before {
         content: "";
