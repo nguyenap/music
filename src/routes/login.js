@@ -6,11 +6,11 @@ import { localData } from '../common/until/dataLocal';
 export default class Login extends React.Component {
   constructor() {
     super();
-    let token = this.getHashParams();
-    console.log('access-token', token.access_token)
+    let token = window.location.search.replace("?access_token=","");
+    console.log('access-token', token)
     token ?
-      (setToken(token.access_token),
-        localData.setAccessToken(token.access_token)
+      (setToken(token),
+        localData.setAccessToken(token)
       ): null;
   }
 

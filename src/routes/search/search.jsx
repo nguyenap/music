@@ -23,9 +23,11 @@ export default class Search extends React.Component {
   componentDidMount() {
     let { location } = this.props;
     let patname = location.pathname;
-    let value = patname.replace("/search/result/", "");
-    if (value !== "") {
-      this.handleChange(value)
+    if(patname!=='/search'){
+      let value = patname.replace("/search/result/", "");
+      if (value !== "") {
+        this.handleChange(value)
+      }
     }
   }
 
