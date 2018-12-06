@@ -4,6 +4,7 @@ import { apiBrowser } from '../../../api/browse-api';
 
 import './genres.scss'
 import ListType from '../../../components/home/listTypes';
+import CatagoriesContainer from '../../../components/home/catagories-container';
 export default class Genres extends React.Component {
   constructor() {
     super();
@@ -26,17 +27,17 @@ export default class Genres extends React.Component {
   render() {
     let { listGenres } = this.state;
     return (
-      <div>
+      <CatagoriesContainer>
         {
           listGenres?
           <ListType
             title="Genres & Moods"
             listData={listGenres}
+            pathname="/playlist"
           />
           :"sorry, this site doestn't have any data, please refest again"
         }
-
-      </div>
+      </CatagoriesContainer>
     );
   };
 };

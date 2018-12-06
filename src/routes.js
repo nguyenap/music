@@ -9,6 +9,7 @@ import Library from './routes/library';
 import Login from './routes/login'
 import { _token } from './api/api';
 import AlbumDetail from './routes/album-detail/album-detail';
+import PlayList from './routes/playlist/playlist';
 
 export default class Root extends React.Component {
   constructor() {
@@ -23,6 +24,7 @@ export default class Root extends React.Component {
           <Route path="/search" component={Search} />
           <Route path="/library" component={Library} />
           <Route path="/album" component={AlbumDetail}/>
+          <Route path="/playlist" component={PlayList}/>
         </Switch>
     );
   };

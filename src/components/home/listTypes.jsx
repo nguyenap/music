@@ -1,16 +1,17 @@
 import React from 'react'
 import classNames from 'classnames'
+import { Link } from 'react-router-dom';
 
 import './listTypes.scss'
 
 export default class ListType extends React.Component {
-  contructor() {
-
+  constructor() {
+    super();
   }
 
   render() {
-    console.log('props', this.props)
-    const { className, onClick, title, listData } = this.props;
+    console.log('props list type', this.props)
+    const { className, onClick, title, listData, pathname } = this.props;
 
     return (
       <div className={classNames("container-list", className)} >
@@ -19,8 +20,11 @@ export default class ListType extends React.Component {
           {/* <div>View more</div> */}
           {listData.map(item =>
             <Type
-              src={item.icons[0].url}
+              id={item.id}
+              src={item.icons?item.icons[0].url:item.images[0].url}
               name={item.name}
+              onClick={onClick}
+              pathname={pathname}
             />)}
         </div>
       </div>
@@ -31,14 +35,25 @@ export default class ListType extends React.Component {
 class Type extends React.Component {
 
   render() {
-    const { src, name } = this.props;
+    const { id, src, name, onClick, pathname } = this.props;
+    console.log("iddd",id)
     return (
-      <div className="item-container">
-        <img src={src} className="image" alt="image" />
+      <Link 
+        to={{
+          pathname:pathname,
+          search: name?(name+"").replace(" ","-"):"",
+          state:{
+            playListID:id
+          },
+        }}
+        className="item-container" >
+
+          <div style={{ backgroundImage: `url(${src})`, backgroundSize: 'cover' }} className="image"></div>
+      
         <div className="name">
           {name}
         </div>
-      </div>
+      </Link>
     )
   }
 }

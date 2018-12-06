@@ -5,35 +5,37 @@ import { albumsApi, apiAlbum } from '../../api/albums-api';
 import { _token } from '../../api/api';
 import { apiPlayList } from '../../api/playlists-api';
 import Genres from './categories/genres';
+import Featured from './categories/featured';
 
-const header = ['feature', 'podcasts', 'genres & moods', 'discover'];
+const header = ['feature',  'genres & moods'];
 
 
 const tabs = [
   {
     id: 0,
     name: 'feature',
-    components: "Feature",
+    components: <Featured/>,
     path: '/feature'
   },
+  // {
+  //   id: 1,
+  //   name: 'podcasts',
+  //   components: "podcasts",
+  //   path: '/feature'
+  // },
   {
     id: 1,
-    name: 'podcasts',
-    components: "podcasts",
-    path: '/feature'
-  },
-  {
-    id: 2,
     name: 'genres & moods',
     components: <Genres/>,
     path: '/feature'
   },
-  {
-    id: 3,
-    name: 'discover',
-    components: "Feature",
-    path: '/feature'
-  }];
+  // {
+  //   id: 3,
+  //   name: 'discover',
+  //   components: "Feature",
+  //   path: '/feature'
+  // }
+];
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -55,28 +57,6 @@ export default class Home extends React.Component {
       })
   }
 
-  getNowPlaying() {
-    spotifyApi.getMyCurrentPlayBackState()
-      .then(resp => {
-        this.setState({
-          nowPlaying: {
-            name: resp.item.name,
-            albumArt: resp.item.album.images[0].url
-          }
-        });
-      })
-  }
-  getDetailAlbum(album) {
-    const { history } = this.props;
-    const { id, href } = album;
-    history.push({
-      pathname: "/album",
-      search: id,
-      state: {
-        album: album,
-      }
-    })
-  }
 
   changeTab(id){
     this.setState({
@@ -103,20 +83,6 @@ export default class Home extends React.Component {
         </div>
         <div className="home-content">
           {this.renderContent()}
-          {/* {albums.length > 0 ?
-            <>
-              <div className="title-content">Albums</div>
-              <div className="home-content-items">
-                {albums.map(album =>
-                  <ListType
-                    className="item-album"
-                    data={album}
-                    onClick={() => this.getDetailAlbum(album)}
-                  />
-                )}
-              </div>
-            </>
-            : <div style={{ color: "#fff", fontSize: 30 }}> no content, please login again</div>} */}
         </div>
 
       </div>

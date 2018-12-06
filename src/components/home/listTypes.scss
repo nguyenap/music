@@ -1,21 +1,36 @@
 .container-list{
-  width: 250px;
+  // width: 100%;
+  // height: 100%;
+
+  .title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #fff;
+    padding: 0 0 15px 8px;
+
+  }
   .list{
     display: grid;
-    grid-template-columns: auto auto auto auto auto;
-    grid-column-gap: 20px;
-    grid-row-gap: 40px;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    height: 100%;
+    transition-duration: 0.4s;
   .item-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     color: #fff;
+    width: 100%;
+    height: calc(18.46vw);
+    padding: 0 8px;   
+    position: relative;
+    padding-bottom: 1.5em;
+    transition-duration: 0.1s;
 
     .image {
-      height: 200px;
-      width: 200px;
-      // border-radius: 150px;
-      &:hover {
+      height: 100%;
+      width: 100%;
+      min-width: 100px;
+      &.hover {
         -webkit-animation-name: spin;
         -webkit-animation-duration: 4000ms;
         -webkit-animation-iteration-count: infinite;
@@ -36,12 +51,15 @@
       }
     }
     .name {
-      margin-top: 10px;
-      font-size: 18px;
+      font-size: 14px;
       font-weight: 400;
       max-width: 200px;
       word-wrap: break-word;
       text-align: center;
+      margin: 12px 0 4px;
+      text-overflow: ellipsis;
+      letter-spacing: 0.07em;
+      width: 100%;
     }
   }
   }
@@ -65,5 +83,42 @@
   }
   to {
       transform:rotate(360deg);
+  }
+}
+@media only screen and (max-width: 1400px) {
+}
+
+@media only screen and (max-width: 1300px) {
+  .container-list{
+    .list{
+      grid-template-columns: 25% 25% 25% 25%;
+    .item-container {
+      height: calc(22.2526vw);
+    }
+    }
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .container-list{
+    .list{
+      grid-template-columns: 33.33% 33.33% 33.33%;
+    .item-container {
+      height: calc(28.6vw);
+    }
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .container-list{
+    .list{
+      grid-template-columns: 100%;
+    .item-container {
+      height: calc(100vw - 256px);
+      min-height: 300px;
+      min-width: 248px;
+    }
+    }
   }
 }
