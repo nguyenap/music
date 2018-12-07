@@ -1,0 +1,18 @@
+.catagory-detail-cus{
+  overflow-y: scroll;
+}
+.catagory-title {
+  height: 40%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50%;
+
+}
+.catagory-detail-content {
+  margin-top: -100px;
+  padding: 0 10px;
+  .title {
+    font-size: 44px
+  }
+}

@@ -4,7 +4,7 @@ import { apiPlayList } from '../../api/playlists-api';
 import './playlist.scss'
 import Spinner from '../../components/spinner/spinner';
 import Track from '../../components/track/track';
-import { emitter } from '../../common/until/EventEmitter';
+import { emitter, EventTypes } from '../../common/until/EventEmitter';
 
 export default class PlayList extends React.Component {
   constructor(props) {
@@ -15,9 +15,12 @@ export default class PlayList extends React.Component {
     }
   }
   componentDidMount() {
+    let { playList } = this.state;
     let { location } = this.props;
-    let { playListID } = location.state;
-    playListID ? this.getAPlayList(playListID) : null;
+    let { playListID } = location? location.state? location.state:"":"";
+    !playList?
+       playListID 
+       ? this.getAPlayList(playListID) : console.log("no id") :console.log("no state");
 
   }
 
@@ -54,7 +57,12 @@ export default class PlayList extends React.Component {
       })
   }
   
-  play() {
+  play(track) {
+    let {history} = this.props;
+    console.log('hiss', track)
+    // history.push({
+    //   hash:track.track.name
+    // })
     emitter.emit(EventTypes.PLAY_MUSIC)
   }
 
@@ -90,7 +98,7 @@ export default class PlayList extends React.Component {
                   }
                 </div>
                 <div className="text">
-                  Total tracks: <span>{total_tracks ? total_tracks : "100"}songs</span>
+                  Total: <span>{total_tracks ? total_tracks :tracks.items.length}songs</span>
                 </div>
               </div>
             </div>
@@ -99,7 +107,7 @@ export default class PlayList extends React.Component {
                 {tracks.items.length > 0 && tracks.items.map(track => (
                   <Track
                     song={track.track}
-                    onClick={() => this.play()}
+                    onClick={() => this.play(track)}
                   />
                 ))}
               </div>
@@ -108,7 +116,7 @@ export default class PlayList extends React.Component {
           :
           <div>
             <Spinner />
-            <div>Loading</div>
+            <div style={{textAlign:"center"}}>Loading</div>
 
           </div>
         }

@@ -15,7 +15,7 @@ export default class Genres extends React.Component {
   componentDidMount() {
     apiBrowser.getAListCategories()
       .then(res => {
-        console.log('res', res)
+        console.log('listGenres', res)
         if (!res.error) {
           this.setState({
             listGenres: res.categories.items,
@@ -33,7 +33,7 @@ export default class Genres extends React.Component {
           <ListType
             title="Genres & Moods"
             listData={listGenres}
-            pathname="/playlist"
+            pathname="/catagory-detail"
           />
           :"sorry, this site doestn't have any data, please refest again"
         }

@@ -1,0 +1,90 @@
+.container-playlist {
+  height: 100%;
+  color: #fff;
+  .playlist-detail{
+    display: grid;
+    height: 100%;
+    grid-template-columns: auto auto;
+    border-top: 1px solid #fff;
+    .playlist-description {
+      margin-left: auto;
+      margin-right: auto;
+      padding: 10px 15px;
+      max-width: 350px; 
+      grid-column: 1;
+      padding-top: 20px;
+
+      .playlist-image {
+        width: 200px;
+        height: 200px;
+        margin-bottom: 20px;
+      }
+
+      .playlist-description-detail{
+
+        .playlist-title {
+          font-size: 30px;
+          font-weight: 600
+          
+        }
+        .text {
+          padding: 20px 0
+        }
+      }
+    }
+      .song-list {
+        padding: 10px 15px;
+        height: 100%;
+        overflow-y: scroll;
+        grid-column: 2;
+        .tracks-container {
+        }
+      }
+      
+    
+  }
+
+}
+@media only screen and (max-width: 1000px) {
+  .container-playlist {
+    .playlist-detail{
+      grid-template-columns: auto;
+      border-bottom: 1px solid #fff;
+      .playlist-description {
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        padding: 10px 15px;
+        max-width: unset;
+        grid-column: 1;
+        
+        
+        .playlist-image {
+          height: 20vw;
+          width: 20vw;
+          max-width: 200px;
+          max-height: 200px;
+          margin-right: 20px;
+        }
+        
+      .playlist-description-detail{
+          .playlist-title {
+            font-size: 30px;
+            font-weight: 600
+            
+          }
+          .text {
+            padding: 1vw 0
+          }
+        }
+      }
+      .song-list {
+        grid-column: 1;
+        .tracks-container {
+        }
+      }
+    }
+  
+  }
+}

@@ -1,5 +1,6 @@
 * {
-  box-sizing: border-box
+  box-sizing: border-box;
+  text-decoration: none;
 }
 html, body, #root {
   height: 100%;

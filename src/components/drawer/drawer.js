@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import {
   IconLogo,
   IconSearch,
@@ -41,10 +43,10 @@ export default class Drawer extends React.Component {
     return (
       <div className="container">
         <div className="nav-expand">
-          <div className="logo">
+          <Link className="logo" to="/home">
             <IconLogo className="logo-icon" />
             <div className="logo-text">Sportify</div>
-          </div>
+          </Link>
           <div>
             <ButtonIcon
               icon={

@@ -1,92 +1,119 @@
 import React from 'react'
+import { apiPlayList } from '../../api/playlists-api';
 
-import './album-detail.scss'
-import Track from '../../components/track/track';
-import { apiTrack } from '../../api/tracks-api';
-import { localData } from '../../common/until/dataLocal';
-import { emitter, EventTypes } from '../../common/until/EventEmitter';
-import { apiAlbum } from '../../api/albums-api';
+import './playlist.scss'
 import Spinner from '../../components/spinner/spinner';
+import Track from '../../components/track/track';
+import { emitter, EventTypes } from '../../common/until/EventEmitter';
 
-
-export default class AlbumDetail extends React.Component {
+export default class PlayList extends React.Component {
   constructor(props) {
     super(props);
-    let {album} = props.location.state
-    let {tracks} = album;
+    console.log("props233232", props)
     this.state = {
-      currentStracksId: "",
-      album: tracks?album:null,
+      playList: null,
     }
   }
-  componentDidMount(){
-    let {album}= this.state;
-    let albumID = window.location.search.replace("?","")
-    if(!album){
-      apiAlbum.getAlbumsByID(albumID)
-      .then(res =>{
-        console.log('res', res);
-        setTimeout(()=>{
-          if(!res.error){
-            this.setState({
-              album:res
-            })
-          }
-        }, 1000)
-        
+  componentDidMount() {
+    let { location } = this.props;
+    let { playListID } = location.state;
+    playListID ? this.getAPlayList(playListID) : null;
+
+  }
+
+  getAPlayList(playListId) {
+    let params = {
+      market: "VN",
+      fields: "fields=name,description,owner(!href,external_urls),images",
+    }
+    apiPlayList.getAPlayList(playListId, params)
+      .then(res => {
+        console.log('playlist', res);
+        if (!res.error) {
+          this.setState({
+            playList: res
+          })
+        };
       })
-      .catch(e => console.log(e));
-    }
   }
+  getAPlayListTracks(playListId) {
+    let params = {
+      market: "VN",
+      fields: "name,items(track(name,href,id,preview_url,artists,duration_ms))",
+      limit: 20,
+      offset: 0
+    }
+    apiPlayList.getAPlistTracks(playListId, params)
+      .then(res => {
+        console.log('tracks', res);
+        if (!res.error) {
+          this.setState({
+            tracks: res
+          })
+        };
+      })
+  }
+  
   play() {
     emitter.emit(EventTypes.PLAY_MUSIC)
   }
 
   render() {
-    let {album} = this.state;
-    const { name, artists, images, release_date, total_tracks, } = album?album:"";
+    let { playList } = this.state;
+    const { name, artists, owner, description, images, release_date, total_tracks, tracks } = playList ? playList : "";
     console.log('list', tracks)
     return (
-      <div className="container-album">
-      {album
-      ?
-        <div className="album-detail">
-          <div className="album-description">
-            <img src={images[0].url} className="album-image" />
-            <div className="album-title">{name}</div>
-            <div className="text artist">
-              Artist:
-            <span>{artists.map(artists => (
-                <span> {artists.name} </span>
-              ))}
-              </span>
-            </div>
-            <div className="text">
-              Release date: <span>{release_date}</span>
-            </div>
-            <div className="text">
-              Total tracks: <span>{total_tracks}</span>
-            </div>
-          </div>
-          <div className="song-list">
-            <div className="tracks-container">
-              {tracks.items.length > 0 && tracks.items.map(track => (
-                <Track
-                  song = {track}
-                  onClick={() => this.play()}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-        :
-        <div>
-          <Spinner/>
-          <div>Loading</div>
+      <div className="container-playlist">
+        {playList
+          ?
+          <div className="playlist-detail">
+            <div className="playlist-description">
+              <img src={images[0].url} className="playlist-image" />
+              <div className="playlist-description-detail">
+                <div className="playlist-title">{name}</div>
+                <div className="text artist">
+                  {artists ?
+                    <span>{artists.map(artists => (
+                      <span> {artists.name}</span>
+                    ))}
+                    </span>
+                    : <span>{owner.display_name}</span>
+                  }
+                </div>
+                <div className="text">
+                  {
+                    release_date ? <span>{release_date}</span> : ""
+                  }
+                  {
 
-        </div>
+                    description ? <span>{description}</span> : ""
+                  }
+                </div>
+                <div className="text">
+                  Total: <span>{total_tracks ? total_tracks :tracks.items.length}songs</span>
+                </div>
+              </div>
+            </div>
+            <div className="song-list">
+              <div className="tracks-container">
+                {tracks.items.length > 0 && tracks.items.map(track => (
+                  <Track
+                    song={track.track}
+                    onClick={() => this.play()}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+          :
+          <div>
+            <Spinner />
+            <div>Loading</div>
+
+          </div>
         }
       </div>
+
     );
   };
 };

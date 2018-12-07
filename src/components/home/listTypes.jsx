@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { Link } from 'react-router-dom';
 
 import './listTypes.scss'
+import { localData } from '../../common/until/dataLocal';
 
 export default class ListType extends React.Component {
   constructor() {
@@ -25,6 +26,7 @@ export default class ListType extends React.Component {
               name={item.name}
               onClick={onClick}
               pathname={pathname}
+              data={item}
             />)}
         </div>
       </div>
@@ -33,9 +35,22 @@ export default class ListType extends React.Component {
 };
 
 class Type extends React.Component {
-
+  saveId(id, pathname){
+    switch(pathname){
+      case '/album':
+        localData.setCurrentAlbumID(id);
+        break;
+      case '/playlist':
+        localData.setCurrentPlaylistID(id);
+      case '/catagory-detail':
+        localData.setCurrentCatagoryID(id);
+      default:
+        localData.setCurrentPlaylistID(id);
+        break;
+    }
+  }
   render() {
-    const { id, src, name, onClick, pathname } = this.props;
+    const { id, src, name, onClick, pathname, data } = this.props;
     console.log("iddd",id)
     return (
       <Link 
@@ -43,13 +58,16 @@ class Type extends React.Component {
           pathname:pathname,
           search: name?(name+"").replace(" ","-"):"",
           state:{
-            playListID:id
+            playListID:id,
+            data: data
           },
         }}
+        onClick={()=>this.saveId(id,pathname)}
         className="item-container" >
+        
 
-          <div style={{ backgroundImage: `url(${src})`, backgroundSize: 'cover' }} className="image"></div>
-      
+          {/* <div style={{ backgroundImage: `url(${src})`, backgroundSize: 'cover' }} className="image"></div> */}
+          <img src={src} width="200px" height="200px" className="image"/>
         <div className="name">
           {name}
         </div>
