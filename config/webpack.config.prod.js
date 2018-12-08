@@ -105,6 +105,9 @@ module.exports = {
   devtool: shouldUseSourceMap ? 'source-map' : false,
   // In production, we only want to load the app code.
   entry: [paths.appIndexJs],
+  devServer: {
+    historyApiFallback: true
+  },
   output: {
     // The build folder.
     path: paths.appBuild,

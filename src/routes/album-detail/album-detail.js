@@ -22,11 +22,14 @@ export default class AlbumDetail extends React.Component {
   }
   componentDidMount() {
     let { album } = this.state;
+    let {location} = this.props;
     console.log('album', album)
-    console.log('window', window.location)
-    let albumID = window.location.search.replace("?", "")
+    console.log('window', window.location);
+    let {state} = location;
     if (!album) {
-      apiAlbum.getAlbumsByID(albumID)
+    let albumID = state?state.playListID:"";
+     if(albumID!=="") {
+       apiAlbum.getAlbumsByID(albumID)
         .then(res => {
           console.log('res', res);
           setTimeout(() => {
@@ -39,6 +42,7 @@ export default class AlbumDetail extends React.Component {
 
         })
         .catch(e => console.log(e));
+      }
     }
   }
   play() {
@@ -87,7 +91,7 @@ export default class AlbumDetail extends React.Component {
           :
           <div>
             <Spinner />
-            <div>Loading</div>
+            <div style={{ color: "#fff", textAlign: "center" }}>Loading</div>
 
           </div>
         }

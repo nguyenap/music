@@ -6,6 +6,7 @@ import Track from '../../components/track/track';
 import ListType from '../../components/home/listTypes';
 import { localData } from '../../common/until/dataLocal';
 import { emitter, EventTypes } from '../../common/until/EventEmitter';
+import Spinner from '../../components/spinner/spinner';
 
 export default class Search extends React.Component {
   constructor(props) {
@@ -108,13 +109,14 @@ export default class Search extends React.Component {
                     onClick={() => this.play()}
                   />
                 ))
-                : albums.map(album => (
+                : albums?
                   <ListType
                     className="item-album"
-                    data={album}
+                    listData={albums}
                     onClick={() => this.getDetailAlbum(album)}
+                    pathname="/album"
                   />
-                ))
+                :<><Spinner /><div style={{ color: "#fff", textAlign: "center" }}>{"Data is loading, please wait a bit...."}</div></>
               }
             </div>
           </>)
