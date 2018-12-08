@@ -25,7 +25,7 @@ export default class Drawer extends React.Component {
     }
   }
   login() {
-    console.log('location', window.location)
+    console.log('location', this.props)
     window.location = window.location.href.includes('localhost')
       ? "http://localhost:8888/login"
       : "http://spotify-backend-demo.herokuapp.com/login"
@@ -38,7 +38,7 @@ export default class Drawer extends React.Component {
 
   render() {
     const { history } = this.props;
-    console.log('props', this.props);
+    console.log('props drawer', this.props);
     let { buttonIsActive } = this.state;
     return (
       <div className="container">

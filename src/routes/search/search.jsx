@@ -11,9 +11,6 @@ import Spinner from '../../components/spinner/spinner';
 export default class Search extends React.Component {
   constructor(props) {
     super(props);
-    const path = window.location.href;
-    console.log('patjjjj', path)
-    console.log('props', props)
     this.state = {
       songs: [],
       albums: [],
@@ -35,7 +32,7 @@ export default class Search extends React.Component {
   handleChange(value) {
     console.log('value', value)
     let { match } = this.props;
-    window.history.pushState("object or string", "Title", match.path + "/result/" + value);
+    // window.history.pushState("object or string", "Title", match.path + "/result/" + value);
     if (value !== "") {
       let params = {
         q: value,

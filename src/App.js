@@ -17,14 +17,13 @@ class App extends Component {
 
   getTokenFromLocal(){
     let token = localData.getAccessToken();
-    console.log('access-token', token)
     token && setToken(token);
   }
   render() {
     return (
       <Router history={history} >
         <div className="App">
-          <Drawer />
+          <Drawer history={history}/>
           <div className="content">
              <Root />
           </div>
