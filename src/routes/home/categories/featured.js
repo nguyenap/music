@@ -11,22 +11,35 @@ export default class Featured extends React.Component {
     super();
     this.state = {
       listFeatured: null,
-      albums: null
+      albums: null,
+      loading: true,
     }
   }
   componentDidMount() {
-    this.getFeatured();
-    this.getSeveralAlbums();
+    setTimeout(() => Promise.all(
+      [
+        this.getFeatured(),
+        this.getSeveralAlbums()
+      ]).then(
+        r => this.setState({
+          loading: false,
+        })
+      ).catch(e => this.setState({
+        loading: false,
+      }))
+      , 1500)
   }
   getSeveralAlbums() {
     apiAlbum.getSeveralAlbums()
       .then(resp => {
         console.log('getSeveralAlbums', resp)
-        resp.albums && resp.albums.length > 0 ?
-          this.setState({
-            albums: resp.albums
-          })
-          : null
+        if (!resp.error) {
+          resp.albums && resp.albums.length > 0 ?
+            this.setState({
+              albums: resp.albums
+            })
+            : null
+        }
       })
   }
   getFeatured() {
@@ -72,33 +85,33 @@ export default class Featured extends React.Component {
 
 
   render() {
-    let { listFeatured, albums } = this.state;
+    let { listFeatured, albums, loading } = this.state;
     return (
       <CatagoriesContainer>
         {
-         albums?
-              <ListType
-                title="Albums"
-                className="item-album"
-                listData={albums}
-                // onClick={() => this.getDetailAlbum(album)}
-                pathname="/album"
-              />
-            : <div style={{ color: "#fff", fontSize: 30 }}> album no content, please login again</div>
-                
-                }
-                
-                { 
-        listFeatured ?
-          (<ListType
-            title={listFeatured.message}
-            listData={listFeatured.playlists.items}
-            // onClick={(id, name) => this.handleClick(id, name)}
-            pathname="/playlist"
-          />)
-          : <div style={{ color: "#fff", fontSize: 30 }}> no content, please login again</div>
-         }
-          {/* <><Spinner /><div style={{ color: "#fff", textAlign: "center" }}>{"Data is loading, please wait a bit...."}</div></>} */}
+          albums ?
+            <ListType
+              title="Albums"
+              className="item-album"
+              listData={albums}
+              // onClick={() => this.getDetailAlbum(album)}
+              pathname="/album"
+            />
+            : !loading?<div style={{ color: "#fff", fontSize: 30, textAlign: 'center' }}> album no content, please login again</div>:null
+
+        }
+
+        {
+          listFeatured ?
+            (<ListType
+              title={listFeatured.message}
+              listData={listFeatured.playlists.items}
+              // onClick={(id, name) => this.handleClick(id, name)}
+              pathname="/playlist"
+            />)
+            : !loading? <div style={{ color: "#fff", fontSize: 30, textAlign: 'center' }}> no content, please login again</div>:null
+        }
+        {loading ? <><Spinner /><div style={{ color: "#fff", textAlign: "center" }}>{"Data is loading, please wait a bit...."}</div></> : null}
       </CatagoriesContainer>
     );
   };
