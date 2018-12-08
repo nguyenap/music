@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Root from './routes';
 import Drawer from './components/drawer/drawer';
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import './App.css'
 import { setToken } from './api/api';

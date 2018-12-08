@@ -17,6 +17,9 @@ export default class Track extends React.Component {
   chooseSong(){
     let {song, onClick}=  this.props;
     localData.setCurrentSong(JSON.stringify(song));
+    
+    // let {name} = song;
+    // window.location.hash = name;
     onClick();
   }
   render() {

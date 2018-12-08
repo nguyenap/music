@@ -13,7 +13,7 @@ export default class AlbumDetail extends React.Component {
   constructor(props) {
     super(props);
     let {location} = props;
-    let { data } = location ? location.state? location.state :null:null;
+    let { data } = location ? location.state? location.state :[]:[];
     let tracks = data ? data.tracks : [];
     this.state = {
       currentStracksId: "",
@@ -24,7 +24,7 @@ export default class AlbumDetail extends React.Component {
     let { album } = this.state;
     let {location} = this.props;
     console.log('album', album)
-    console.log('window', window.location);
+    console.log('window', location);
     let {state} = location;
     if (!album) {
     let albumID = state?state.playListID:"";
