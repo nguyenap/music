@@ -8,6 +8,7 @@ import { emitter, EventTypes } from '../../common/until/EventEmitter';
 import { apiAlbum } from '../../api/albums-api';
 import Spinner from '../../components/spinner/spinner';
 
+import querystring from 'query-string'
 
 export default class AlbumDetail extends React.Component {
   constructor(props) {
@@ -18,15 +19,15 @@ export default class AlbumDetail extends React.Component {
     this.state = {
       currentStracksId: "",
       album: tracks ? data : null,
+      loading: true,
     }
   }
 
   componentDidMount() {
     let { album } = this.state;
     let { location } = this.props;
-    // console.log('window', location);
     if (!album) {
-      let albumID = location ? location.search.replace("?id=", "") : "";
+      let albumID = location ? querystring.parse(location.search).id : "";
       if (albumID !== "") {
         this.getAlbums(albumID);
       }
@@ -44,16 +45,22 @@ export default class AlbumDetail extends React.Component {
             })
           }
         }, 1000)
+        this.setState({
+          loading: false,
+        })
 
       })
-      .catch(e => console.log(e));
+      .catch(e =>
+        this.setState({
+          loading: false,
+        }));
   }
   play() {
     emitter.emit(EventTypes.PLAY_MUSIC)
   }
 
   render() {
-    let { album } = this.state;
+    let { album, loading } = this.state;
     const { name, artists, images, release_date, total_tracks, tracks } = album ? album : "";
     // console.log('list', tracks)
     return (
@@ -93,11 +100,17 @@ export default class AlbumDetail extends React.Component {
             </div>
           </div>
           :
-          <div>
-            <Spinner />
-            <div style={{ color: "#fff", textAlign: "center" }}>Loading</div>
+          loading ?
+            <div>
+              <Spinner />
+              <div style={{ color: "#fff", textAlign: "center" }}>Loading</div>
 
-          </div>
+            </div>
+            :
+            <div>
+              <div style={{ fontSize: 30, color: "#fff", textAlign: "center" }}>no content, please login again</div>
+
+            </div>
         }
       </div>
     );

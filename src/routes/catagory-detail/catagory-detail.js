@@ -1,4 +1,6 @@
 import React from 'react'
+import querystring from 'query-string';
+
 import CatagoriesContainer from '../../components/home/catagories-container';
 import ListType from '../../components/home/listTypes';
 import { apiBrowser } from '../../api/browse-api';
@@ -16,7 +18,7 @@ export default class CatagoryDetail extends React.Component {
   componentDidMount() {
     // console.log('props', this.props)
     let { location } = this.props;
-    let playListID  = location? location.search.replace("?id=", ""):"";
+    let playListID  = location? querystring.parse(location.search).id:"";
     playListID!==""? this.getCatagoryDetail(playListID):console.log("have no palylist id");
     
   }

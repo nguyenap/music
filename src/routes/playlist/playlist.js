@@ -5,6 +5,7 @@ import './playlist.scss'
 import Spinner from '../../components/spinner/spinner';
 import Track from '../../components/track/track';
 import { emitter, EventTypes } from '../../common/until/EventEmitter';
+import querystring from 'query-string';
 
 export default class PlayList extends React.Component {
   constructor(props) {
@@ -12,15 +13,16 @@ export default class PlayList extends React.Component {
     console.log("props233232", props)
     this.state = {
       playList: null,
+      loading: true,
     }
   }
   componentDidMount() {
     let { playList } = this.state;
     let { location } = this.props;
-    let { playListID } = location? location.state? location.state:"":"";
-    !playList?
-       playListID 
-       ? this.getAPlayList(playListID) : console.log("no id") :console.log("no state");
+    let playListID = location ? querystring.parse(location.search).id : "";;
+    !playList ?
+      playListID !== ""
+        ? this.getAPlayList(playListID) : console.log("no id") : console.log("no state");
 
   }
 
@@ -31,13 +33,17 @@ export default class PlayList extends React.Component {
     }
     apiPlayList.getAPlayList(playListId, params)
       .then(res => {
-        // console.log('playlist', res);
+        console.log('playlist', res);
         if (!res.error) {
           this.setState({
             playList: res
           })
         };
+        this.setState({
+          loading: false,
+        })
       })
+      .catch(e => this.setState({ loading: false }))
   }
   getAPlayListTracks(playListId) {
     let params = {
@@ -51,14 +57,19 @@ export default class PlayList extends React.Component {
         // console.log('tracks', res);
         if (!res.error) {
           this.setState({
-            tracks: res
+            tracks: res,
           })
         };
+        this.setState({
+          loading: false,
+        })
+
       })
+      .catch(e => this.setState({ loading: false }))
   }
-  
+
   play(track) {
-    let {history} = this.props;
+    let { history } = this.props;
     // history.push({
     //   hash:track.track.name
     // })
@@ -66,7 +77,7 @@ export default class PlayList extends React.Component {
   }
 
   render() {
-    let { playList } = this.state;
+    let { playList, loading } = this.state;
     const { name, artists, owner, description, images, release_date, total_tracks, tracks } = playList ? playList : "";
     return (
       <div className="container-playlist">
@@ -96,7 +107,7 @@ export default class PlayList extends React.Component {
                   }
                 </div>
                 <div className="text">
-                  Total: <span>{total_tracks ? total_tracks :tracks.items.length}songs</span>
+                  Total: <span>{total_tracks ? total_tracks : tracks.items.length}songs</span>
                 </div>
               </div>
             </div>
@@ -112,11 +123,16 @@ export default class PlayList extends React.Component {
             </div>
           </div>
           :
-          <div>
-            <Spinner />
-            <div style={{textAlign:"center"}}>Loading</div>
+          (loading ?
+            <div>
+              <Spinner />
+              <div style={{ textAlign: "center" }}>Loading</div>
 
-          </div>
+            </div>
+            :
+            <div>
+              <div style={{ fontSize: 30, textAlign: "center" }}>no content, please login again</div>
+            </div>)
         }
       </div>
 
