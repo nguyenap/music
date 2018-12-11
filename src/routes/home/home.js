@@ -41,19 +41,10 @@ export default class Home extends React.Component {
     super(props);
 
     this.state = {
-      albums: [],
       activeTabID: 0,
     }
   }
   componentDidMount() {
-    apiAlbum.getSeveralAlbums()
-      .then(resp => {
-        resp.albums && resp.albums.length > 0 ?
-          this.setState({
-            albums: resp.albums
-          })
-          : null
-      })
   }
 
 
@@ -69,7 +60,7 @@ export default class Home extends React.Component {
 
   render() {
     const { history } = this.props;
-    const { albums, activeTabID } = this.state;
+    const { activeTabID } = this.state;
     // console.log('state', this.state);
     return (
       <div className="home">

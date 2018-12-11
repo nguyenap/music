@@ -97,7 +97,7 @@ export default class Featured extends React.Component {
               // onClick={() => this.getDetailAlbum(album)}
               pathname="/album"
             />
-            : !loading?<div style={{ color: "#fff", fontSize: 30, textAlign: 'center' }}> album no content, please login again</div>:null
+            :null
 
         }
 
@@ -109,9 +109,11 @@ export default class Featured extends React.Component {
               // onClick={(id, name) => this.handleClick(id, name)}
               pathname="/playlist"
             />)
-            : !loading? <div style={{ color: "#fff", fontSize: 30, textAlign: 'center' }}> no content, please login again</div>:null
+            : null
         }
-        {loading ? <><Spinner /><div style={{ color: "#fff", textAlign: "center" }}>{"Data is loading, please wait a bit...."}</div></> : null}
+        {loading ? 
+        <><Spinner /><div style={{ color: "#fff", textAlign: "center" }}>{"Data is loading, please wait a bit...."}</div></> 
+        : !albums && !listFeatured ?<div style={{ color: "#fff", fontSize: 30, textAlign: 'center' }}>no content, please login again</div>:null}
       </CatagoriesContainer>
     );
   };
