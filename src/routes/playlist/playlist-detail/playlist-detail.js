@@ -9,15 +9,14 @@ import { emitter, EventTypes } from '../../common/until/EventEmitter';
 export default class PlayList extends React.Component {
   constructor(props) {
     super(props);
-    console.log("props233232", props)
     this.state = {
       playList: null,
     }
   }
   componentDidMount() {
     let { location } = this.props;
-    let { playListID } = location.state;
-    playListID ? this.getAPlayList(playListID) : null;
+     let playListID = location ? location.search.replace("?id=", "") : "";
+    playListID!=="" ? this.getAPlayList(playListID) : console.log("have no playlist id");
 
   }
 
@@ -28,7 +27,7 @@ export default class PlayList extends React.Component {
     }
     apiPlayList.getAPlayList(playListId, params)
       .then(res => {
-        console.log('playlist', res);
+        // console.log('playlist', res);
         if (!res.error) {
           this.setState({
             playList: res
@@ -45,7 +44,7 @@ export default class PlayList extends React.Component {
     }
     apiPlayList.getAPlistTracks(playListId, params)
       .then(res => {
-        console.log('tracks', res);
+        // console.log('tracks', res);
         if (!res.error) {
           this.setState({
             tracks: res
@@ -61,7 +60,7 @@ export default class PlayList extends React.Component {
   render() {
     let { playList } = this.state;
     const { name, artists, owner, description, images, release_date, total_tracks, tracks } = playList ? playList : "";
-    console.log('list', tracks)
+    // console.log('list', tracks)
     return (
       <div className="container-playlist">
         {playList

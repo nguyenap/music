@@ -14,9 +14,14 @@ export default class CatagoryDetail extends React.Component {
     }
   }
   componentDidMount() {
-    console.log('props', this.props)
+    // console.log('props', this.props)
     let { location } = this.props;
-    let { playListID } = location.state;
+    let playListID  = location? location.search.replace("?id=", ""):"";
+    playListID!==""? this.getCatagoryDetail(playListID):console.log("have no palylist id");
+    
+  }
+
+  getCatagoryDetail(playListID){
     let params = {
       country: "VN",
       limit: 20,
@@ -33,7 +38,6 @@ export default class CatagoryDetail extends React.Component {
       })
       .catch(_ => console.log(_))
   }
-
   render() {
     let { catagoryDetail } = this.state;
     let { name, icons } = this.someData;

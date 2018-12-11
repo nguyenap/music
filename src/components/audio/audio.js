@@ -68,7 +68,7 @@ export default class Audio extends React.Component {
           <div className="song-name">{song ? song.name : ""}</div>
           <div className="artist">
             {artists && artists.map((artist, index) => (
-              <span>{artist.name}
+              <span key={index}>{artist.name}
                 {index < artists.length - 1
                   ? <span>{", "}</span>
                   : null

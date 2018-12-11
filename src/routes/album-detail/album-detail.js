@@ -12,38 +12,41 @@ import Spinner from '../../components/spinner/spinner';
 export default class AlbumDetail extends React.Component {
   constructor(props) {
     super(props);
-    let {location} = props;
-    let { data } = location ? location.state? location.state :[]:[];
+    let { location } = props;
+    let { data } = location ? location.state ? location.state : [] : [];
     let tracks = data ? data.tracks : [];
     this.state = {
       currentStracksId: "",
       album: tracks ? data : null,
     }
   }
+
   componentDidMount() {
     let { album } = this.state;
-    let {location} = this.props;
-    console.log('album', album)
-    console.log('window', location);
-    let {state} = location;
+    let { location } = this.props;
+    // console.log('window', location);
     if (!album) {
-    let albumID = state?state.playListID:"";
-     if(albumID!=="") {
-       apiAlbum.getAlbumsByID(albumID)
-        .then(res => {
-          console.log('res', res);
-          setTimeout(() => {
-            if (!res.error) {
-              this.setState({
-                album: res
-              })
-            }
-          }, 1000)
-
-        })
-        .catch(e => console.log(e));
+      let albumID = location ? location.search.replace("?id=", "") : "";
+      if (albumID !== "") {
+        this.getAlbums(albumID);
       }
     }
+  }
+
+  getAlbums(albumID) {
+    apiAlbum.getAlbumsByID(albumID)
+      .then(res => {
+        // console.log('res', res);
+        setTimeout(() => {
+          if (!res.error) {
+            this.setState({
+              album: res
+            })
+          }
+        }, 1000)
+
+      })
+      .catch(e => console.log(e));
   }
   play() {
     emitter.emit(EventTypes.PLAY_MUSIC)
@@ -52,7 +55,7 @@ export default class AlbumDetail extends React.Component {
   render() {
     let { album } = this.state;
     const { name, artists, images, release_date, total_tracks, tracks } = album ? album : "";
-    console.log('list', tracks)
+    // console.log('list', tracks)
     return (
       <div className="container-album">
         {album
@@ -64,9 +67,10 @@ export default class AlbumDetail extends React.Component {
                 <div className="album-title">{name}</div>
                 <div className="text artist">
                   Artist:
-            <span>{artists.map(artists => (
-                    <span> {artists.name} </span>
-                  ))}
+                  <span>
+                    {artists.map(artists => (
+                      <span> {artists.name} </span>
+                    ))}
                   </span>
                 </div>
                 <div className="text">

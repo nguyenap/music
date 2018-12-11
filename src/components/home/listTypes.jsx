@@ -11,7 +11,7 @@ export default class ListType extends React.Component {
   }
 
   render() {
-    console.log('props list type', this.props)
+    // console.log('props list type', this.props)
     const { className, onClick, title, listData, pathname } = this.props;
 
     return (
@@ -21,6 +21,7 @@ export default class ListType extends React.Component {
           {/* <div>View more</div> */}
           {listData.map(item =>
             <Type
+              key={item.id}
               id={item.id}
               src={item.icons?item.icons[0].url:item.images[0].url}
               name={item.name}
@@ -36,27 +37,27 @@ export default class ListType extends React.Component {
 
 class Type extends React.Component {
   saveId(id, pathname){
-    switch(pathname){
-      case '/album':
-        localData.setCurrentAlbumID(id);
-        break;
-      case '/playlist':
-        localData.setCurrentPlaylistID(id);
-      case '/catagory-detail':
-        localData.setCurrentCatagoryID(id);
-      default:
-        localData.setCurrentPlaylistID(id);
-        break;
-    }
+    // switch(pathname){
+    //   case '/album':
+    //     localData.setCurrentAlbumID(id);
+    //     break;
+    //   case '/playlist':
+    //     localData.setCurrentPlaylistID(id);
+    //   case '/catagory-detail':
+    //     localData.setCurrentCatagoryID(id);
+    //   default:
+    //     localData.setCurrentPlaylistID(id);
+    //     break;
+    // }
   }
   render() {
     const { id, src, name, onClick, pathname, data } = this.props;
-    console.log("iddd",id)
+    // console.log("iddd",id)
     return (
       <Link 
         to={{
-          pathname:pathname,
-          search: name?(name+"").replace(" ","-"):"",
+          pathname:pathname+"/"+(name?(name+"").replace(" ","-"):""),
+          search:`id=${id}`,
           state:{
             playListID:id,
             data: data

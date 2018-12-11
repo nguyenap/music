@@ -48,7 +48,6 @@ export default class Home extends React.Component {
   componentDidMount() {
     apiAlbum.getSeveralAlbums()
       .then(resp => {
-        console.log('resp', resp)
         resp.albums && resp.albums.length > 0 ?
           this.setState({
             albums: resp.albums
@@ -71,7 +70,7 @@ export default class Home extends React.Component {
   render() {
     const { history } = this.props;
     const { albums, activeTabID } = this.state;
-    console.log('state', this.state);
+    // console.log('state', this.state);
     return (
       <div className="home">
         <div className="header">

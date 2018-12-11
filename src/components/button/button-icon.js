@@ -17,7 +17,6 @@ export default class ButtonIcon extends React.Component {
       onClick,
       isActived
     } = this.props;
-    console.log("isActived", isActived)
     return(
       <Link 
         to={path} 

@@ -16,10 +16,8 @@ export default class Track extends React.Component {
 
   chooseSong(){
     let {song, onClick}=  this.props;
+    // console.log('props song', this.props )
     localData.setCurrentSong(JSON.stringify(song));
-    
-    // let {name} = song;
-    // window.location.hash = name;
     onClick();
   }
   render() {
@@ -39,7 +37,7 @@ export default class Track extends React.Component {
           </span>
           <div className="artist">
             {artists && artists.map((artist, index) => (
-              <span>{artist.name}
+              <span key={index}>{artist.name}
                 {index < artists.length-1
                   ?<span>{", "}</span>
                   :null

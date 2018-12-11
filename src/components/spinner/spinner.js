@@ -12,7 +12,6 @@ export default class Spinner extends React.Component {
   }
   changeSpeed(offset=0){
     let {duration}= this.state;
-    console.log('duration', duration);
     if((offset <0 && duration>=50) || offset>0){
       this.setState({
         duration: duration+offset

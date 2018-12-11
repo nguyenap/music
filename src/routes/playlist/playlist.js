@@ -31,7 +31,7 @@ export default class PlayList extends React.Component {
     }
     apiPlayList.getAPlayList(playListId, params)
       .then(res => {
-        console.log('playlist', res);
+        // console.log('playlist', res);
         if (!res.error) {
           this.setState({
             playList: res
@@ -48,7 +48,7 @@ export default class PlayList extends React.Component {
     }
     apiPlayList.getAPlistTracks(playListId, params)
       .then(res => {
-        console.log('tracks', res);
+        // console.log('tracks', res);
         if (!res.error) {
           this.setState({
             tracks: res
@@ -59,7 +59,6 @@ export default class PlayList extends React.Component {
   
   play(track) {
     let {history} = this.props;
-    console.log('hiss', track)
     // history.push({
     //   hash:track.track.name
     // })
@@ -69,7 +68,6 @@ export default class PlayList extends React.Component {
   render() {
     let { playList } = this.state;
     const { name, artists, owner, description, images, release_date, total_tracks, tracks } = playList ? playList : "";
-    console.log('list', tracks)
     return (
       <div className="container-playlist">
         {playList

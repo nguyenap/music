@@ -6,7 +6,6 @@ import { localData } from '../common/until/dataLocal';
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
-    console.log('props login', props);
     let {location}= props;
     let token = location.search.replace("?access_token=","");
     token ?

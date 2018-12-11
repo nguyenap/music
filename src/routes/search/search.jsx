@@ -21,7 +21,7 @@ export default class Search extends React.Component {
   componentDidMount() {
     let { location } = this.props;
     let patname = location.pathname;
-    if(patname!=='/search'){
+    if (patname !== '/search') {
       let value = patname.replace("/search/result/", "");
       if (value !== "") {
         this.handleChange(value)
@@ -30,9 +30,9 @@ export default class Search extends React.Component {
   }
 
   handleChange(value) {
-    console.log('value', value)
+    // console.log('value', value)
     let { match } = this.props;
-    // window.history.pushState("object or string", "Title", match.path + "/result/" + value);
+    window.history.pushState("object or string", "Title", match.path + "/result/" + value);
     if (value !== "") {
       let params = {
         q: value,
@@ -51,7 +51,7 @@ export default class Search extends React.Component {
             }, () => {
               // window.location.pathname = match.path+"/result/"+value
 
-              console.log('hello', window.location.pathname)
+              // console.log('hello', window.location.pathname)
             })
           }
           else {
@@ -85,7 +85,6 @@ export default class Search extends React.Component {
   }
   render() {
     const { tabIsActive, songs, albums, value } = this.state;
-    console.log('result', this.state)
     return (
       <div className="search-container">
         <SearchInput
@@ -100,20 +99,21 @@ export default class Search extends React.Component {
             </div>
             <div className={"search-content" + (tabIsActive === 2 ? " albums" : "")}>
               {tabIsActive === 1 ?
-                songs.map(song => (
+                songs.map((song,index) => (
                   <Track
+                    key={index}
                     song={song}
                     onClick={() => this.play()}
                   />
                 ))
-                : albums?
+                : albums ?
                   <ListType
                     className="item-album"
                     listData={albums}
                     onClick={() => this.getDetailAlbum(album)}
                     pathname="/album"
                   />
-                :<><Spinner /><div style={{ color: "#fff", textAlign: "center" }}>{"Data is loading, please wait a bit...."}</div></>
+                  : <><Spinner /><div style={{ color: "#fff", textAlign: "center" }}>{"Data is loading, please wait a bit...."}</div></>
               }
             </div>
           </>)
@@ -145,17 +145,15 @@ class SearchInput extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentWillReceiveProps(nextProps){
-    console.log('next', nextProps)
-    if(nextProps.value!== this.state.value){
-      this.setState({
-        value: nextProps.value
-      })
-    }
+  componentWillReceiveProps(nextProps) {
+    // console.log('next', nextssProps)
+    // if(nextProps.value!== this.state.value){
+    this.setState({
+      value: nextProps.value
+    })
   }
 
   handleChange(event) {
-    console.log('vemetment')
     const { onChange } = this.props;
     this.setState({ value: event.target.value })
     onChange(event.target.value);
